@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-compliance-service
+  labels:
+    app: employee-compliance-automation
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: employee-compliance-automation
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-compliance-nodeport
+  labels:
+    app: employee-compliance-automation
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+    protocol: TCP
+    name: http
+  selector:
+    app: employee-compliance-automation
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-compliance-loadbalancer
+  labels:
+    app: employee-compliance-automation
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: employee-compliance-automation
