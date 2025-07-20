@@ -63,20 +63,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v3
-      with:
-        version: 'latest'
-        
-    - name: Configure kubectl
-      run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-        
-    - name: Update deployment image
-      run: |
-        sed -i "s|image: .*|image: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }}|g" k8s/deployment.yaml
-        
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f k8s/deployment.yaml
