@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: employee-compliance-app
-        image: yourusername/employee-compliance-automation:latest
+        image: naveenm77/employeecompliance:tag
         imagePullPolicy: Always
         ports:
         - containerPort: 80
